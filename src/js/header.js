@@ -77,7 +77,7 @@ let nowIndex = 0;
   for (let i = 0; i <liNodes.length; i++) {
     liNodes[i].onclick = function () {
       //同步
-      nowIndex = i
+      nowIndex = i;
       move(i)
     };
     //开始让小箭头到第一个li下面

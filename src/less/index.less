@@ -1,5 +1,19 @@
 @import "./reset";
 
+.oneActive{
+  color:#009ee0;
+  font-size:80px;
+  line-height:0.8;
+  font-weight:bold;
+  letter-spacing:-5px;
+}
+.common-text{
+  color:white;
+  line-height:1.5;
+  font-size:15px;
+ }
+
+
 #wrap{
   position: relative;
   height: 100%;
@@ -69,7 +83,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: deeppink;
     overflow: hidden;
     >ul{
       position: absolute;
@@ -77,11 +90,28 @@
       width:100%;
       height: 500%;
       transition: top 1s;
-      //will-change: top;
+      //性能优化预解析
+      will-change: top;
       >li{
         position: relative;
         width:100%;
         height: 20%;
+        background-repeat: no-repeat;
+        &:nth-child(1){
+          background-image: url('../images/bg1.jpg');
+        }
+        &:nth-child(2){
+          background-image: url('../images/bg2.jpg');
+        }
+        &:nth-child(3){
+          background-image: url('../images/bg3.jpg');
+        }
+        &:nth-child(4){
+          background-image: url('../images/bg4.jpg');
+        }
+        &:nth-child(5){
+          background-image: url('../images/bg5.jpg');
+        }
         >section{
           position: absolute;
           top:50%;
@@ -89,7 +119,281 @@
           transform: translate(-50%,-50%);
           width: 1100px;
           height: 520px;
-          background-color: deepskyblue;
+          //第一屏
+          &.home{
+            position: relative;
+            .home-carousel{
+              position: relative;
+              width:100%;
+              height: 100%;
+              transform-style: preserve-3d;
+              perspective: 1000px;
+              li{
+                position: absolute;
+                top:0;
+                left: 0;
+                text-align: center;
+                line-height: 520px;
+                color: #ffffff;
+                width: 100%;
+                height: 100%;
+                visibility: hidden;
+                &.show{
+                  visibility: visible;
+                }
+                &.leftHide{
+                  visibility: hidden;
+                  animation: leftHide 2s linear;
+                }
+                &.rightShow{
+                  visibility: visible;
+                  animation: rightShow 2s linear;
+                }
+                &.leftShow{
+                  visibility: visible;
+                  animation: leftShow 2s linear;
+                }
+                &.rightHide{
+                  visibility: hidden;
+                  animation: rightHide 2s linear;
+                }
+
+                &:nth-child(1){
+                  background:#dc6c5f;
+                }
+                &:nth-child(2){
+                  background:#95dc84;
+                }
+                &:nth-child(3){
+                  background:#64b9d2;
+                }
+                &:nth-child(4){
+                  background:#000000;
+                }
+              }
+            }
+            .home-points{
+              position: absolute;
+              left: 50%;
+              bottom: 0;
+              transform: translate(-50%);
+              >li{
+                float: left;
+                width: 20px;
+                height: 20px;
+                background:rgba(255,255,255,0.5) ;
+                margin: 2px;
+                box-shadow:0 0 4px rgba(25,25,25,0.8);
+                border-radius: 50%;
+                &.active{
+                  background:rgba(255,255,255,1) ;
+                }
+              }
+            }
+          }
+          //第二屏
+          &.course{
+            .course-title{
+              margin: 50px;
+              }
+            .course-text{
+              width: 400px;
+              margin-left: 50px;
+            }
+            .course-photo{
+              position: absolute;
+              top: 70px;
+              right: 50px;
+              width: 480px;
+              li{
+                position: relative;
+                float: left;
+                width: 120px;
+                height: 132px;
+                &:hover{
+                  .back{
+                    transform: rotateY(360deg);
+                  }
+                  .front{
+                    transform: rotateY(180deg);
+                  }
+                }
+                .front{
+                  width: 100%;
+                  height: 100%;
+                  background-image: url("../images/pcwelt.png");
+                  background-repeat: no-repeat;
+                  background-position: center;
+                  backface-visibility: hidden;
+                  transition: transform 2s;
+                }
+                .back{
+                  position: absolute;
+                  left:0;
+                  top:0;
+                  width: 100%;
+                  height: 100%;
+                  margin: 15px;
+                  backface-visibility: hidden;
+                  transform: rotateY(180deg);
+                  background: deepskyblue;
+                  transition: transform 2s;
+                }
+              }
+            }
+          }
+          //第三屏
+          &.work{
+            .work-hader{
+              margin: 50px 0 100px 50px;
+            }
+            .work-list{
+              margin-left: 50px;
+              li{
+                position: relative;
+                float: left;
+                width:220px;
+                height: 133px;
+                margin: 0 1px;
+                overflow: hidden;
+                &:nth-child(4){
+                  width: 332px;
+                  height: 133px;
+                }
+                &:hover{
+                  img{
+                    transform:  scale(1.2) rotate(20deg);
+                  }
+                  .work-mask{
+                    opacity: 1;
+                    div{
+                      background-position: 0 -35px;
+                    }
+                  }
+                }
+                img{
+                  transition: transform 1s;
+                }
+                .work-mask{
+                  position: absolute;
+                  top:0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  box-sizing: border-box;
+                  background: rgba(25,25,25,0.8);
+                  color: white;
+                  padding: 10px;
+                  opacity: 0;
+                  transition: opacity 1s;
+                  div{
+                    width: 32px;
+                    height: 34px;
+                    position: absolute;
+                    top:0;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    margin: auto;
+                    background: url("../images/zoomico.png");
+                    background-repeat: no-repeat;
+                    transition: background-position 1s;
+                  }
+                }
+              }
+            }
+            .work-robot{
+              width: 137px;
+              height: 191px;
+              background: url("../images/robot.png");
+              background-repeat: no-repeat;
+              position: absolute;
+              left: 900px;
+              top: 170px;
+              animation: robotMove 5s linear infinite;
+            }
+          }
+        //  第四屏
+          &.about{
+
+            >h2{
+              margin: 50px 0 100px 50px;
+            }
+            >p{
+              width: 400px;
+              margin-left: 50px;
+            }
+            .about-one{
+              width: 260px;
+              height: 200px;
+              border: 5px solid rgba(255,255,255,0.5);
+              border-radius: 8px;
+              position: absolute;
+              &:nth-of-type(1){
+                left: 750px;
+                top: 50px;
+                li{
+                  background-image: url("../images/about2.jpg");
+                }
+              }
+              &:nth-of-type(2){
+                left: 600px;
+                top: 290px;
+                li{
+                  background-image: url("../images/about4.jpg");
+                }
+              }
+              ul{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                &:hover{
+                  li{
+                    // 下左右上
+                    &:nth-child(1){
+                      background-position: 0 100px ;
+                    }
+                    &:nth-child(2){
+                      background-position: -260px 0 ;
+                    }
+                    &:nth-child(3){
+                      background-position: 130px -100px ;
+                    }
+                    &:nth-child(4){
+                      background-position: -130px -200px
+                    }
+                  }
+                }
+                li{
+                  float: left;
+                  background-repeat: no-repeat;
+                  transition:background-position 1s ;
+                  &:nth-child(1){
+                    width: 50%;
+                    height: 50%;
+                    background-position:0 0 ;
+                  }
+                  &:nth-child(2){
+                    width: 50%;
+                    height: 50%;
+                    background-position: -130px 0 ;
+                  }
+                  &:nth-child(3){
+                    width: 50%;
+                    height: 50%;
+                    background-position: 0px -100px ;
+                  }
+                  &:nth-child(4){
+                    width: 50%;
+                    height: 50%;
+                    background-position: -130px -100px
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -97,4 +401,45 @@
 
 
 
+}
+
+
+//第一屏动画
+
+/*
+  点击右边小圆点：
+    左边：向左位移，旋转-30deg，从前面到后面，从显示到隐藏
+    右边：向右位移，旋转30deg，从后面到前面，从隐藏到显示
+ */
+
+@keyframes leftHide {
+  0%{visibility: visible;transform: translateZ(0)}
+  50%{transform: translateX(-40%) rotateY(30deg) scale(.8)}
+  100%{visibility: hidden;transform: translateZ(-200px);}
+}
+
+@keyframes rightShow {
+  0%{visibility: hidden;transform: translateZ(-200px);}
+  50%{transform: translateX(40%) rotateY(-30deg) scale(.8)}
+  100%{visibility: visible;transform: translateZ(0)}
+}
+
+@keyframes leftShow {
+  0%{visibility: hidden;transform: translateZ(-200px);}
+  50%{transform: translateX(-40%) rotateY(30deg) scale(.8)}
+  100%{visibility: visible;transform: translateZ(0)}
+
+}
+
+@keyframes rightHide {
+  0%{visibility: visible;transform: translateZ(0)}
+  50%{transform: translateX(40%) rotateY(-30deg) scale(.8)}
+  100%{visibility: hidden;transform: translateZ(-200px);}
+}
+//机器人 关键帧
+@keyframes robotMove {
+  0%{}
+  49%{transform: translateX(-400px)}
+  50%{transform: translateX(-400px) rotateY(180deg)}
+  100%{transform: rotateY(180deg)}
 }

@@ -1,11 +1,12 @@
 //引入头部
 import header from './header';
-import firstView from './firstView'
+import lastView from './lastView';
 //引入less
 import '../less/index.less';
-
+//mp3
+import '../images/audio.mp3'
 
 
 
 header();
-firstView();
+lastView();
